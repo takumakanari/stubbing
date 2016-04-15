@@ -1,0 +1,12 @@
+openresty:
+  build: .
+  ports:
+   - "8080:80"
+   - "4567:4567"
+  links:
+    - "redis"
+
+redis:
+  image: library/redis:2.8
+  ports:
+   - "6379:6379"
