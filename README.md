@@ -10,6 +10,12 @@ Simurate external HTTP resources
 
 $ docker-compose up [-d]
 
+#### environments for configuration
+
+- STUBBING_REDIS_HOST: host of redis, "localhost" is used by default.
+- STUBBING_REDIS_PORT: port of redis, 6379 is used by default.
+
+
 ### Add dummy response
 
     $ vi person.json
@@ -18,13 +24,13 @@ $ docker-compose up [-d]
 {"name" : "Michel", "age" : 15}
 ```
 
-    $ curl -XPOST localhost:4567/v1/data?path=/some/external/service&rwait=5 @person.json
-    
+    $ curl -XPOST localhost:4567/some/external/service?rwait=5 @person.json
+
 
 #### params
 - path: service uri for a stub.
 - rwait: maximum randomized seconds to sleep before response.
-    
+
 ### Get dummy data from stub server
 
     $ curl localhost:80/some/external/service | jq .

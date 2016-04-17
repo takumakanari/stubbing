@@ -1,10 +1,16 @@
 openresty:
   build: .
+  volumes:
+    - "./nginx:/etc/nginx"
+    - "./nginx/conf.d:/etc/nginx/conf.d"
   ports:
    - "8080:80"
    - "4567:4567"
   links:
     - "redis"
+  environment:
+   - "STUBBING_REDIS_HOST=192.168.64.5"
+   - "STUBBING_REDIS_PORT=6379"
 
 redis:
   image: library/redis:2.8
